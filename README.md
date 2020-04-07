@@ -3,7 +3,7 @@
 The [corpus](https://github.com/fangj/friends) used in this work.
 ### Preprocessing
 ## Generation Methods
-### Training and Evaluation
+### Training and Generation
 ## Evaluation
 
 ## TODO list
