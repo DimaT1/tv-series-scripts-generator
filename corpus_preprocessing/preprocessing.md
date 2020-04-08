@@ -16,7 +16,7 @@ We will use:
 This code makes basic preprocessing:
 ```sh
 for file in ./*.html; do
-    html2text <(iconv -t UTF-8//IGNORE "$file" | tr '\n' ' ') | sed 's/\*//g' | sed 's/_//g' | sed 's/(/[/g' | sed 's/)/]/g' > "${file//html/raw}"
+    html2text <(iconv -t UTF-8//IGNORE "$file" | tr '\n' ' ') | sed 's/\*//g' | sed 's/_//g' | sed 's/(/[/g' | sed 's/)/]/g' | sed 's/</[/g' | sed 's/>/]/g' > "${file//html/raw}"
 done
 ```
 

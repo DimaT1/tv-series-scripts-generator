@@ -20,7 +20,7 @@ Every transcript ends with "End", "THE END", etc.
 
 Files `0101.html` and `0423uncut.html` have previously unseen parts which are shown in blue (`#0000ff`) text.
 
-Stage directions can be surrounded by `[]` or by `()`.
+Stage directions can be surrounded by `[]`, `<>` or by `()`.
 Stage directions can start from new line and interrupt character's line:
  - Stage direction interrupts character's line if it describes character's actions or feelings.
  - Stage direction starts from new line if it contains some of general descriptions:
