@@ -10,6 +10,15 @@ import re
 
 ACTOR_REGEXP = r"^((young |ms. |mrs. |miss. |mr. |dr. |fat |)\w+( and \w+||)|stage director|pbs volunteer|gary collins|priest on tv|pizza guy|aunt lillian|coma guy|fireman no. \d|mr.heckles|woman no. \d|joey \w+|the director)\s*:"
 STAGE_DIRECTION_REGEXP = r"^\["
+SCENE_RESET_MARKERS = (
+    "time lapse",
+    "cut",
+    "flashback scene",
+    "opening credits",
+    "ending credits",
+    "commercial break",
+    "closing credits",
+)
 
 
 # @dataclass  # mypy does not allow any abstract class to be a dataclass
@@ -41,7 +50,7 @@ class StageDirection(Action):
         self.direction = text[1:-1].strip()
 
     def __str__(self):
-        return self.direction
+        return f"stage direction: {self.direction}"
 
     def __repr__(self):
         return str(self)
@@ -126,7 +135,16 @@ def load_file(filename: str) -> List[str]:
     return [" ".join(line.split()) for line in non_empty]
 
 
+def stage_direction_is_a_scene_reset(line: str) -> bool:
+    line = line.lower()
+    for marker in SCENE_RESET_MARKERS:
+        if marker in line:
+            return True
+    return False
+
+
 def load_scenes_from_folder(dirname: str) -> List[Scene]:
+    # TODO: refactor
     scenes: List[Scene] = []
 
     for filename in sorted(listdir(dirname)):
@@ -134,15 +152,23 @@ def load_scenes_from_folder(dirname: str) -> List[Scene]:
 
         description: str = ''
         script: List[str] = []
-
         for line in load_file(SAMPLE_FILE):
             if 'scene:' in line.lower():
                 if description != '' and script != []:
                     scenes.append(Scene(script, description))
                 description = line
                 script = []
-            else:
+            elif re.match(ACTOR_REGEXP, line.lower()) is not None:
                 script.append(line)
+            elif stage_direction_is_a_scene_reset(line):
+                if description != '' and script != []:
+                    scenes.append(Scene(script, description))
+                script = []
+                description += '\n' + line
+            elif re.match(STAGE_DIRECTION_REGEXP, line.lower()) is not None:
+                script.append(line)
+            else:
+                pass
 
         if description != '' and script != []:
             scenes.append(Scene(script, description))
