@@ -34,6 +34,12 @@ Stage directions can start from new line and interrupt character's line:
 Character's lines always begin with character's name.
 Character's names may be bold or uppercase in some transcripts.
 Sometimes `All:` is used to indicate that all characters say a line together.
+Some transcripts use aliases instead of names:
+ - "RACH" for Rachel
+ - "MNCA" for Monica
+ - "PHOE" for Phoebe
+ - "CHAN" for Chandler
+
 
 Used encodings are different:
  - text/html; charset=iso-8859-1
