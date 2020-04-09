@@ -19,13 +19,9 @@ The file `preprocess.sh` makes basic preprocessing.
 Now the data is stored in `.raw` files and formatted this way:
 ```
 Phoebe: Do it do it do it!
-
 Monica: [Shouts to the guy] Woo-woo!
-
 [The guy turns round, startled. Monica points to Phoebe. The guy gets hit by a
 truck]
-
 Phoebe: I can't believe you did that!
-
 Opening Credits
 ```
