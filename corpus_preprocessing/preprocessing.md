@@ -9,18 +9,12 @@ Let us change the stage directions surrounding from `()` to `[]`.
 
 We will use:
 
+ - `bash`
  - `iconv` to change the encoding to UTF-8
  - `html2text` to convert html to raw text
  - `sed`, `tr` to edit strings
- - `bash`
 
-This code makes basic preprocessing:
-```sh
-mkdir -p raws
-for file in ./*.html; do
-    html2text <(iconv -t UTF-8//IGNORE "$file" | tr '\n' ' ') | sed 's/\*//g;s/_//g;s/(/[/g;s/)/]/g;s/</[/g;s/>/]/g;s/^RACH:/Rachel:/;s/^MNCA:/Monica:/;s/^PHOE:/Phoebe:/;s/^CHAN:/Chandler/' > "./raws/${file//html/raw}"
-done
-```
+The file `preprocess.sh` makes basic preprocessing.
 
 Now the data is stored in `.raw` files and formatted this way:
 ```
