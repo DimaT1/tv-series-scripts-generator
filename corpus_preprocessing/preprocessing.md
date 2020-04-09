@@ -8,6 +8,7 @@ We won't do anything special with the beginning and ending of transcripts for no
 Let us change the stage directions surrounding from `()` to `[]`.
 
 We will use:
+
  - `iconv` to change the encoding to UTF-8
  - `html2text` to convert html to raw text
  - `sed`, `tr` to edit strings
