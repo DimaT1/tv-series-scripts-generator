@@ -3,7 +3,7 @@
 The [corpus](https://github.com/fangj/friends) used in this work.
 Here is the [description](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/corpus_preprocessing/corpus_description.md)
 ### Preprocessing
-[Part 1](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/corpus_preprocessing/preprocessing.md)
+[Basics](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/corpus_preprocessing/preprocessing.md)
 
 [Data Structures Example](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/corpus_preprocessing/datastructures_sample.ipynb)
 ## Generation Methods
