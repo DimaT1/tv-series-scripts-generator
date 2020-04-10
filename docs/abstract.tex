@@ -1,0 +1,141 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lipsum}
+\usepackage{multicol}
+\usepackage{cite}
+
+\usepackage{geometry}
+\geometry{top=25mm}
+\geometry{bottom=45mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+
+
+\newcommand{\signature}[1]{\underline{\hspace{10em}} /#1/}
+\newcommand{\datefield}[1]{<<\underline{\hspace{1.8em}}>>\underline{\hspace{10.5em}} #1 г.}
+\newcommand{\peoplefield}[3]{#1\\ \signature{#2} \\ \datefield{#3}}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{}
+\renewcommand{\thesubsubsection}{}
+
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    {\large \textbf{ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ\\
+    НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ\\
+    <<ВЫСШАЯ ШКОЛА ЭКОНОМИКИ>>}\\}
+
+    \vspace{2.5em}
+    Факультет компьютерных наук\\
+    Департамент программной инженерии
+\end{center}
+
+\begin{minipage}[t]{0.5\textwidth}
+    \peoplefield{СОГЛАСОВАНО\\Доцент факультета
+    гуманитарных наук Школы\\ Лингвистики Высшей
+    Школы Экономики\\}{Ф. Фишер}{2019}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    \peoplefield{УТВЕРЖДАЮ\\Академический руководитель
+    образовательной\\ программы
+    «Программная инженерия»
+    профессор департамента программной
+    инженерии, канд. техн. наук}{В.В. Шилов}{2019}
+\end{minipage}
+
+\vspace{7em}
+\begin{center}
+    \textbf{Аннотация\\к курсовой работе}
+
+    \vspace{3em}
+    на тему <<An Approach to the Generation and Evaluation of Scripts for Television Series>>\\
+
+    \vspace{2em}
+    по направлению подготовки бакалавров 09.03.04 «Программная инженерия»\\
+\end{center}
+
+\vspace{8em}
+\begin{flushright}
+\begin{minipage}[t]{0.4\textwidth}
+    \peoplefield{Выполнил
+    студент группы БПИ173\\
+    образовательной программы
+    09.03.04\\ «Программная
+    инженерия»}{Д.М. Торилов}{2019}
+\end{minipage}
+\end{flushright}
+ 
+\begin{center}
+    \vfill
+    \textbf{Москва 2019}
+\end{center}
+
+\end{titlepage}
+
+\setcounter{page}{2}
+\section{Keywords}
+Dialogue system; Evaluation metrics; Deep Learning; Seq2seq; Attention; Language models.
+\section{Abstract}
+\begin{multicols}{2}
+%     safjlds a\cite{Malkov}\cite{transformer}
+% 
+%     afdskljflsad 
+% 
+Today, the dialogue systems are in great demand, as they allow to formulate requests fuzzy and still get valid answers during human-like conversation.
+These systems can be used in chat-bots and voice assistants for different purposes, for example they can solve the problem of responding to customers' questions about products and services.
+
+We investigate the application of dialogue systems to the TV Series scripts generation. This task will be solved using seq2seq models, which are widely used in machine translation and in dialogue systems too.
+
+In recent past we've got a lot of good-working algorithms for word embedding generation (word2vec\cite{w2v}, GloVe\cite{pennington-etal-2014-glove}, FastText\cite{fast-text}). Such embeddings carry partial semantics information about the encoded words.
+There is also an another approach to the embeddings representation where tokens are not whole words, but their parts. These approaches are Byte Pair Encoding (BPE), WordPiece, etc. 
+These embeddings can be used as inputs for dialogue models.
+
+In recent years, one main breakthrough has been made in the field of seq2seq algorithms --- the attention mechanism invention and transformer especially.
+Using attention mechanism made neural machine translation (NMT) more effective than using statistical machine translation (SMT)\cite{transformer}.
+Bare LSTM and GRU could not beat SMT in quality before this breakthrough.
+
+An important aspect of dialogue response generation is how to evaluate the quality of the generated answers.
+Recent works in dialogue systems use adopted metrics from machine translation.
+There is shown\cite{how_not_to_evaluate} that these metrics correlate very weakly with human judgements.
+These metrics do encourage the appearance of words of the source sequence in the response, while normal dialogue does not require this.
+    The human dialogue can be very allegorical and full of allusions. For example, the following dialogue is a valid human-like dialogue, but it will have low metrics score:\\
+\textit{-- What about going to the cinema with me tonight?}\\
+\textit{-- I've got lots and lots of work.}
+\vspace{1em}
+
+We have the dataset of <<Friends>> TV Series transcripts, seasons 1--10. That is approximately 900k words. The transcripts are better data than just subtitles because they contain scene directions.
+
+The aim of this work is to build a dialogue system for TV series generation which will get high evaluation using old metrics like BLEU\cite{bleu} and METEOR\cite{meteor} and then to find the new metric which will satisfy some popular requirements\cite{how_not_to_evaluate} and have higher correlation with human judgements than old metrics do.
+
+
+\selectlanguage{english}
+\bibliographystyle{alpha}
+\bibliography{bibsrc}
+\end{multicols}
+
+\newpage
+\vspace*{\fill}
+\begin{flushleft}
+\begin{minipage}[t]{0.4\textwidth}
+    \peoplefield{Исполнитель
+    студент группы БПИ173\\
+    образовательной программы
+    09.03.04\\ «Программная
+    инженерия»}{Д.М. Торилов}{2019}\\
+
+    \peoplefield{СОГЛАСОВАНО\\Доцент факультета
+    гуманитарных наук Школы Лингвистики Высшей
+    Школы Экономики\\}{Ф. Фишер}{2019}
+\end{minipage}
+\end{flushleft}
+ 
+
+\end{document}
