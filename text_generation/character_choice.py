@@ -48,6 +48,30 @@ def generate_character_to_id_dict(scenes: List[utils.Scene],
     return character_to_id
 
 
+def generate_id_to_character_dict(scenes: List[utils.Scene],
+                                  top_k_characters: int) -> Dict[int, str]:
+    """
+    Generates the dict to map characters to their ids
+    Params:
+        scenes -- a list of scenes
+        top_k_characters -- how much ids will be given to characters
+    """
+    actor_counter: C[str] = Counter()
+
+    for scene in scenes:
+        for action in scene.actions:
+            actor_counter[action.actor] += 1
+
+    id_to_character = {
+        index: actor[0] for index, actor in enumerate(
+            [
+                (UNK_CHARACTER, 0),
+                (END_CHARACTER, 0),
+            ] + actor_counter.most_common(top_k_characters))
+    }
+    return id_to_character
+
+
 def scenes_to_character_sequences(
         scenes: List[utils.Scene],
         character_to_id: Dict[str, int]) -> List[List[int]]:
