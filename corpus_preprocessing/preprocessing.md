@@ -12,7 +12,7 @@ We will use:
  - `bash`
  - `iconv` to change the encoding to UTF-8
  - `html2text` to convert html to raw text
- - `sed`, `tr` to edit strings
+ - `sed`, `tr` to edit string streams
 
 The file `preprocess.sh` makes basic preprocessing.
 
