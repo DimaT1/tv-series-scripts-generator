@@ -5,7 +5,7 @@ We won't also use `07outtakes.html`, because it is a transcript of a special out
 
 We won't do anything special with the beginning and ending of transcripts for now.
 
-Let us change the stage directions surrounding from `()` to `[]`.
+Let us change the stage directions surrounding from `()` and `<>` to `[]`.
 
 We will use:
 
