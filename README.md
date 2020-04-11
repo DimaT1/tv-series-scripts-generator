@@ -11,7 +11,7 @@ Here is the [description](https://github.com/DimaT1/tv-series-scripts-generator/
 
 [Example of choosing the character to say a line](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/character_choice_sample.ipynb)
 ### Training and Generation
-[Brief text generation doc](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/text_generation.md)
+[Brief text generation overview](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/text_generation.md)
 
 [On how to choose characters](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/character_choice_sample.ipynb)
 
