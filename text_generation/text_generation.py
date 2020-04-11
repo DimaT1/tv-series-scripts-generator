@@ -1,12 +1,16 @@
 from collections import Counter
 from nltk.tokenize import WordPunctTokenizer
+from nltk.translate.bleu_score import corpus_bleu
 import numpy as np
 from character_choice import UNK_CHARACTER
+import tensorflow as tf
 
 
 UNK = '__UNK__'
 BOS = '__BOS__'
 EOS = '__EOS__'
+L = tf.keras.layers
+keras = tf.keras
 
 
 def tokenize(x):
@@ -67,8 +71,8 @@ def words_to_ids(line: str, word_to_id, sentence_len=50) -> np.array:
 
 def ids_to_words(arr: np.array, id_to_word) -> str:
     res = []
-    for id in arr:
-        res.append(id_to_word[id])
+    for _id in arr:
+        res.append(id_to_word[_id])
     return ' '.join(filter(lambda x: x not in {BOS, EOS, UNK}, res))
 
 
@@ -87,3 +91,71 @@ def generate_trainable_data(scenes, character_to_id, word_to_id):
         data.append(buf)
 
     return data
+
+
+class DialogueModel(L.Layer):
+    def __init__(self, vocab_size, embedding_dim, n_units, batch_sz):
+        super().__init__()
+
+        self.batch_sz = batch_sz
+        self.enc_units = self.dec_units = n_units
+
+        self.inc_emb = tf.keras.layers.Embedding(vocab_size, embedding_dim)
+        self.dec_emb = tf.keras.layers.Embedding(vocab_size, embedding_dim)
+
+        self.enc = tf.keras.layers.GRU(self.enc_units,
+                                       return_sequences=True,
+                                       return_state=True,
+                                       recurrent_initializer='glorot_uniform')
+
+        self.dec = tf.keras.layers.GRU(self.dec_units,
+                                       return_sequences=True,
+                                       return_state=True,
+                                       recurrent_initializer='glorot_uniform')
+
+        self.fc = tf.keras.layers.Dense(vocab_size)
+
+        self.W1 = tf.keras.layers.Dense(self.dec_units)
+        self.W2 = tf.keras.layers.Dense(self.dec_units)
+        self.V = tf.keras.layers.Dense(1)
+
+    def encode(self, inp):
+        hidden = tf.zeros((self.batch_sz, self.enc_units))
+        x = self.inc_emb(inp)
+        output, state = self.enc(x, initial_state=hidden)
+        return output, state
+
+    def bahdanau_attention(self, query, values):
+        query_with_time_axis = tf.expand_dims(query, 1)
+        score = self.V(tf.nn.tanh(
+            self.W1(query_with_time_axis) + self.W2(values)))
+        attention_weights = tf.nn.softmax(score, axis=1)
+        context_vector = attention_weights * values
+        context_vector = tf.reduce_sum(context_vector, axis=1)
+        return context_vector, attention_weights
+
+    def decode(self, x, hidden, enc_output):
+        context_vector, attention_weights = self.bahdanau_attention(
+            hidden,
+            enc_output
+        )
+        x = self.embedding(x)
+        x = tf.concat([tf.expand_dims(context_vector, 1), x], axis=-1)
+        output, state = self.gru(x)
+        output = tf.reshape(output, (-1, output.shape[2]))
+        x = self.fc(output)
+        return x
+
+    def call(self, inp):
+        sample_output, sample_hidden = self.encode(inp)
+        return self.decode(tf.random.uniform((self.batch_sz, 1)),
+                           sample_hidden, sample_output)
+
+
+def predict_answer(model, character, line, answ):
+    pass
+
+
+def KEDS():
+    ## K-Means Evaluation for Dialogue Systems
+    pass
