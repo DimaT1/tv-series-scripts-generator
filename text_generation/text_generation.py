@@ -156,6 +156,5 @@ def predict_answer(model, character, line, answ):
     pass
 
 
-def KEDS():
-    ## K-Means Evaluation for Dialogue Systems
+def CCEDS():
     pass

@@ -12,4 +12,6 @@ while IFS= read -r line; do
     printf "\n" >> ./.build/full.md
 done <<< "$mds"
 
-pandoc -s -o ./docs/documentation.pdf ./.build/full.md
+echo '# References' >> ./.build/full.md
+
+pandoc -s --metadata-file=./docs/header.yaml --filter pandoc-citeproc ./.build/full.md -o ./docs/documentation.pdf

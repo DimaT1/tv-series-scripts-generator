@@ -49,11 +49,24 @@ Also this type of models can have no "intuition" or "augmented information about
 
 Recent time in the past the two main RNN architectures were invented for text processing: GRU and LSTM. These architectures are invented to eliminate two main RNN problems: the problem of vanishing and exploding gradients.
 
+During the learning process neural networks receive their weight updates based on their partial derivatives of the error function with respect to the current weight. Every gradient descent step is made to the direction of the anti gradient of the loss function.
+
+We can find the derivative of each layer using the chain rule:
+
+$$
+\frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)
+$$
+
+There also is an individual technique, __backpropagation through time__, which is used for RNN training.
+
+
 __LSTM__ (Long Short Term Memory)
+
+![LSTM unit, source (https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-var-GRU.png)](https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-var-GRU.png)
 
 __GRU__ (Gated Recurrent Unit) networks
 
-There also is an individual technique, __backpropagation through time__, which is used for RNN training.
+![GRU unit, source (https://miro.medium.com/max/1400/1*6eNTqLzQ08AABo-STFNiBw.png)](https://miro.medium.com/max/1400/1*6eNTqLzQ08AABo-STFNiBw.png)
 
 Now we are using GRU with Bahdanau attention.
 
@@ -109,3 +122,4 @@ One of the reasons of good (comparing to language modeling) n-gram perplexity he
 
 ## Stage directions
 We will not generate stage directions at this work: there is about 4k samples. The data is very noisy and unstructured. There is no background to become good at stage directions generation using this data.
+
