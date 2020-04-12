@@ -11,10 +11,18 @@ Here is the [description](https://github.com/DimaT1/tv-series-scripts-generator/
 
 [Example of choosing the character to say a line](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/character_choice_sample.ipynb)
 ### Training and Generation
+[Brief text generation overview](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/text_generation.md)
+
+[On how to choose characters](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/character_choice_sample.ipynb)
+
+[Generation](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/text-generation.ipynb)
+
 ## Evaluation
+
+[Custom: Cluster Chains Evaluation for Dialogue Systems](https://github.com/DimaT1/tv-series-scripts-generator/blob/master/text_generation/text-generation.ipynb)
 
 ## TODO list
  - [X] Corpus description
  - [X] Preprocessing
- - [ ] Training and Generation
+ - [X] Training and Generation
  - [ ] Evaluation
